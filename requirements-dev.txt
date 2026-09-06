@@ -1,1 +1,7 @@
-pytest>=8.0
+# Development dependencies. The generator itself has none at runtime.
+#
+# Pinned exactly, for the same reason upstream data is pinned to a commit SHA
+# and every Action to a full commit SHA: a build should fail because of a change
+# someone made, not because a third party released something overnight. A new
+# pytest arrives as a Dependabot pull request that CI has to pass first.
+pytest==9.1.1
