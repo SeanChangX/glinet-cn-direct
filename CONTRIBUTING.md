@@ -48,6 +48,7 @@ bash scripts/acceptance-checks.sh dist
 | New or changed upstream source | An entry in `config/expected-sources.json`, a section in `SOURCES.md` saying *why*, and its license in `THIRD_PARTY_NOTICES.md` |
 | Adding a bare TLD to `allowed-tld-rules.txt` | An explanation of what else that TLD would route direct. This is a routing-policy change, not a config tweak |
 | Adding a never-direct domain | Just open a PR — this list is meant to grow |
+| Anything that changes `README.md` | The same change in `README.zh-TW.md`. `README.md` is the canonical version; the translation is expected to track it, not lag behind |
 | Adding an IP canary | A review date, and a note on why that address is stable |
 
 ## Testing expectations

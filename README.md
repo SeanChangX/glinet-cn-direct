@@ -1,3 +1,5 @@
+**English** · [繁體中文](README.zh-TW.md)
+
 # glinet-cn-direct
 
 **Auditable, fail-closed GL.iNet routing rules built from established upstream datasets.**
