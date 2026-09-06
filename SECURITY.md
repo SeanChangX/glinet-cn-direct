@@ -112,9 +112,15 @@ Neither is dangerous on its own — a stale list routes traffic the way it did
 yesterday. The risk is believing the rules are current when they stopped
 updating weeks ago.
 
-The check that costs nothing: the `generated_at` field in
-`metadata.json` on the `release` branch. If it is more than a couple of days
-old, the schedule is not running.
+The cheapest check is the `generated_at` field in `metadata.json` on the
+`release` branch. Read it carefully, though: it is rewritten only when a build
+*publishes*, and a build publishes only when the rules actually changed. A few
+quiet days are therefore legitimate and mean the upstreams simply held still.
+
+A date that is weeks old is not legitimate. It means one of two things — the
+schedule stopped running, or every run since then failed closed — and only the
+repository's Actions history distinguishes them. Check there before assuming
+either.
 
 ```bash
 curl -s https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/metadata.json \
