@@ -19,10 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-The routing rule data published in dist/ and in GitHub Releases is generated
-from third-party upstream datasets. Those datasets keep their own licenses and
-copyright notices, reproduced in full in THIRD_PARTY_NOTICES.md. See SOURCES.md
-for provenance details.
