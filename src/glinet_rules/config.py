@@ -12,8 +12,37 @@ from pathlib import Path
 
 from .errors import ConfigError
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CONFIG_DIR = REPO_ROOT / "config"
+#: Where config/ lives when the package is imported straight from a source
+#: checkout (src/glinet_rules/config.py -> the repository root). This is only a
+#: fallback: once the package is installed normally its files sit in
+#: site-packages, where walking up two directories lands somewhere meaningless.
+_PACKAGE_RELATIVE_ROOT = Path(__file__).resolve().parents[2]
+
+
+def default_config_dir() -> Path:
+    """Find the config/ directory belonging to the working tree being built.
+
+    Configuration is a property of the checkout you are building from, not of
+    wherever pip happened to install the package, so the current directory is
+    consulted first and the package-relative guess comes last.
+    """
+    cwd = Path.cwd().resolve()
+    candidates = [cwd / "config"]
+    # Allow running from a subdirectory of the checkout, but only accept an
+    # ancestor that actually looks like this project.
+    candidates += [
+        parent / "config"
+        for parent in cwd.parents
+        if (parent / "pyproject.toml").is_file()
+    ]
+    candidates.append(_PACKAGE_RELATIVE_ROOT / "config")
+
+    for candidate in candidates:
+        if (candidate / "policy.toml").is_file():
+            return candidate
+    # Nothing found: return the most likely intent so the error names a path
+    # the caller recognizes.
+    return cwd / "config"
 
 _CANARY_RE = re.compile(
     r"^(?P<ip>\S+)\s*(?:#\s*(?P<label>.*?)\s*(?:\|\s*review:\s*(?P<review>\d{4}-\d{2}-\d{2}))?\s*)?$"
@@ -135,11 +164,18 @@ class Config:
         return self.policy.value("general", "generator_version")
 
 
-def load_config(config_dir: Path | str = DEFAULT_CONFIG_DIR) -> Config:
-    """Load and cross-validate config/. Raises ConfigError on any problem."""
-    config_dir = Path(config_dir)
+def load_config(config_dir: Path | str | None = None) -> Config:
+    """Load and cross-validate config/. Raises ConfigError on any problem.
+
+    Passing None discovers the directory with `default_config_dir()`.
+    """
+    config_dir = Path(config_dir) if config_dir is not None else default_config_dir()
     if not config_dir.is_dir():
-        raise ConfigError(f"config directory not found: {config_dir}")
+        raise ConfigError(
+            f"config directory not found: {config_dir}\n"
+            "Run from a checkout of the repository, or pass --config with the "
+            "path to a directory containing policy.toml."
+        )
 
     policy_path = config_dir / "policy.toml"
     if not policy_path.is_file():

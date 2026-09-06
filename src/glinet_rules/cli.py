@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 from . import GENERATOR_NAME, __version__
-from .config import DEFAULT_CONFIG_DIR, load_config
+from .config import load_config
 from .errors import ConfigError, FetchError, SecurityGateError
 from .validate import validate_text_file
 
@@ -26,9 +26,9 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--config",
         type=Path,
-        default=DEFAULT_CONFIG_DIR,
+        default=None,
         metavar="DIR",
-        help="configuration directory (default: %(default)s)",
+        help="configuration directory (default: the config/ of the checkout you run from)",
     )
 
 
