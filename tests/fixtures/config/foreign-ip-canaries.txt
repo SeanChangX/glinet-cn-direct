@@ -1,0 +1,2 @@
+8.8.8.8    # Google Public DNS | review: 2099-01-01
+1.1.1.1    # Cloudflare DNS    | review: 2099-01-01

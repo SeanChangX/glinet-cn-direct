@@ -1,0 +1,17 @@
+# Synthetic upstream IPv4 fixture.
+# Deliberately messy: duplicates, non-canonical host bits, a bare address,
+# comments, blank lines and one unparsable entry.
+
+1.0.1.0/24
+1.0.2.0/23
+1.0.1.0/24
+1.2.3.5/24
+
+203.208.60.1
+110.242.68.0/22   # covers a CN canary
+114.114.114.0/24
+223.5.5.0/24
+180.76.76.0/24
+119.29.29.0/24
+119.3.70.0/24
+not-an-ip-address

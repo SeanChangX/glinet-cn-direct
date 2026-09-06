@@ -1,0 +1,23 @@
+# Bare top-level-domain rules that this project accepts in domain output.
+#
+# A bare TLD line such as "cn" matches EVERY domain under that TLD. That is
+# enormously broad, so the build rejects any bare TLD that is not listed here.
+# Adding a line to this file is an explicit, reviewable routing-policy decision.
+#
+# Upstream (felixonmars/dnsmasq-china-list) relies on the bare "cn" rule for
+# Mainland China coverage: it contains zero explicit ".cn"-suffixed entries.
+# Removing "cn" would send all of .cn through the VPN tunnel.
+#
+# Repository policy decision (2026-09-06): keep all six bare TLDs currently
+# shipped by upstream, matching geosite:cn semantics. Note that "top" and
+# "wang" are open generic TLDs operated by Chinese registries; they are used by
+# non-Chinese sites too, so they are a deliberate false-positive trade-off.
+#
+# One TLD per line, lowercase, ASCII/Punycode form. '#' starts a comment.
+
+cn            # China country-code TLD
+top           # generic TLD, Chinese registry (open registration)
+wang          # generic TLD, Chinese registry (open registration)
+xn--fiqs8s    # .中国  (China)
+xn--55qx5d    # .公司  (Company)
+xn--io0a7i    # .网络  (Network)

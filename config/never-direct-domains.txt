@@ -1,0 +1,43 @@
+# Domains that must NEVER be routed direct by this project.
+#
+# The build fails if a generated CN domain equals one of these OR is a parent
+# domain that would encompass one of them (e.g. a generated "com" line would
+# encompass "google.com").
+#
+# This list is NOT exhaustive. It is a tripwire for upstream contamination,
+# not a complete description of what should stay inside the VPN tunnel.
+#
+# One domain per line. '#' starts a comment.
+
+google.com
+youtube.com
+googlevideo.com
+gstatic.com
+ggpht.com
+openai.com
+chatgpt.com
+oaistatic.com
+anthropic.com
+claude.ai
+github.com
+githubusercontent.com
+githubassets.com
+cloudflare.com
+cloudflare-dns.com
+twitter.com
+x.com
+twimg.com
+facebook.com
+fbcdn.net
+instagram.com
+whatsapp.com
+telegram.org
+t.me
+wikipedia.org
+wikimedia.org
+reddit.com
+discord.com
+signal.org
+protonmail.com
+proton.me
+duckduckgo.com

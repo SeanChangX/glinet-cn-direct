@@ -1,0 +1,15 @@
+# Mainland China IPv4 addresses that MUST fall inside the generated CN set.
+#
+# Chosen from long-lived, well-known Chinese public infrastructure rather than
+# from volatile CDN answers. Same review-date discipline as the foreign
+# canaries: if one of these ever legitimately moves, update the entry instead of
+# weakening the check.
+#
+# Format: <ipv4>  # <label> | review: YYYY-MM-DD
+
+114.114.114.114   # 114DNS public resolver          | review: 2027-09-06
+223.5.5.5         # AliDNS public resolver          | review: 2027-09-06
+180.76.76.76      # Baidu public DNS                | review: 2027-09-06
+119.29.29.29      # DNSPod / Tencent public DNS     | review: 2027-09-06
+110.242.68.66     # baidu.com (China Unicom, Hebei) | review: 2027-03-06
+119.3.70.188      # Huawei Cloud (bilibili origin)  | review: 2027-03-06

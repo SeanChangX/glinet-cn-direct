@@ -1,0 +1,26 @@
+{
+  "sources": {
+    "ipv4_primary": {
+      "role": "primary",
+      "kind": "github_raw",
+      "owner": "fixture",
+      "repo": "ipv4",
+      "ref": "main",
+      "path": "upstream-ipv4.txt",
+      "license": "MIT",
+      "max_bytes_key": "ipv4_max_bytes",
+      "description": "Offline fixture. Never fetched: tests always supply an override."
+    },
+    "domains_primary": {
+      "role": "primary",
+      "kind": "github_raw",
+      "owner": "fixture",
+      "repo": "domains",
+      "ref": "main",
+      "path": "upstream-domains.txt",
+      "license": "WTFPL",
+      "max_bytes_key": "domain_max_bytes",
+      "description": "Offline fixture. Never fetched: tests always supply an override."
+    }
+  }
+}

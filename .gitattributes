@@ -1,0 +1,10 @@
+# Generated rule files must be byte-identical everywhere, including on Windows
+# checkouts. Git's autocrlf would rewrite them to CRLF and break both the
+# published checksums and the determinism guarantee, so LF is forced globally.
+* text=auto eol=lf
+
+# Generated artifacts: never touched, never normalized, always LF.
+dist/**       -text eol=lf
+tests/fixtures/** -text eol=lf
+
+*.sh text eol=lf

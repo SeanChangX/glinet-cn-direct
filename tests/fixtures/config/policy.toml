@@ -1,0 +1,43 @@
+# Policy for the offline fixture build. Thresholds are relaxed only where the
+# fixture deliberately exercises a code path (unparsable lines, tiny set sizes);
+# every safety gate itself stays enabled.
+
+[general]
+generator_version = "test"
+
+[fetch]
+timeout_seconds = 5
+max_redirects = 1
+user_agent = "glinet-cn-direct-tests/1.0"
+ipv4_max_bytes = 1048576
+domain_max_bytes = 1048576
+max_unparsable_percent = 25.0
+
+[ipv4]
+hard_reject_prefix_threshold = 4
+broad_prefix_review_threshold = 8
+allowed_broad_networks = []
+min_networks = 1
+max_networks = 10000
+max_coverage_percent = 20.0
+max_rule_count_change_percent = 15.0
+max_coverage_change_percent = 10.0
+max_removed_percent = 10.0
+
+[domains]
+min_domains = 1
+max_domains = 10000
+max_rule_count_change_percent = 15.0
+max_removed_percent = 10.0
+unsupported_warn = 1
+unsupported_fail = 500
+
+[secondary]
+enabled = false
+max_domain_divergence_percent = 5.0
+max_ipv4_coverage_divergence_percent = 15.0
+required = false
+
+[artifacts]
+max_lines_warn = 150000
+max_bytes_warn = 4194304

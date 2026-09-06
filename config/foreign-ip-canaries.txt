@@ -1,0 +1,20 @@
+# Foreign IPv4 addresses that must NOT fall inside the generated CN network set.
+#
+# IP ownership is not permanent. Each entry carries a review date; CI warns when
+# an entry is older than the review interval so stale canaries get re-checked
+# rather than silently rotting into false alarms.
+#
+# These are a tripwire, not the main defence. The real protections are upstream
+# provenance, CIDR validation, reserved-range checks, broad-prefix limits and
+# diff thresholds. Do not grow this list into a geolocation database.
+#
+# Format: <ipv4>  # <label> | review: YYYY-MM-DD
+
+8.8.8.8           # Google Public DNS               | review: 2027-09-06
+8.8.4.4           # Google Public DNS (secondary)   | review: 2027-09-06
+1.1.1.1           # Cloudflare DNS                  | review: 2027-09-06
+1.0.0.1           # Cloudflare DNS (secondary)      | review: 2027-09-06
+9.9.9.9           # Quad9 DNS                       | review: 2027-09-06
+208.67.222.222    # OpenDNS resolver                | review: 2027-09-06
+168.95.1.1        # Chunghwa Telecom HiNet DNS (TW) | review: 2027-09-06
+140.82.121.4      # GitHub (AS36459)                | review: 2027-03-06

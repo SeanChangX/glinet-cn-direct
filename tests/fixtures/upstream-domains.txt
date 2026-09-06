@@ -1,0 +1,14 @@
+# Synthetic upstream domain fixture in dnsmasq form, mixed with V2Ray syntax.
+
+server=/baidu.com/114.114.114.114
+server=/www.baidu.com/114.114.114.114
+server=/BILIBILI.com/114.114.114.114
+server=/qq.com./114.114.114.114
+domain:taobao.com
+full:www.jd.com
+keyword:example
+regexp:^foo.*bar$
+cn
+https://evil.example
+*.wildcard.example
+taobao.com

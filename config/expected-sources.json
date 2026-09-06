@@ -1,0 +1,55 @@
+{
+  "$comment": [
+    "Upstream sources this build is allowed to consume.",
+    "fetch.py refuses to download anything that is not described here, so a",
+    "typo or a tampered config cannot silently redirect the build at a",
+    "different host. Changing this file is a reviewable routing-policy change.",
+    "See SOURCES.md for why each source was selected."
+  ],
+  "sources": {
+    "ipv4_primary": {
+      "role": "primary",
+      "kind": "github_raw",
+      "owner": "gaoyifan",
+      "repo": "china-operator-ip",
+      "ref": "ip-lists",
+      "path": "china.txt",
+      "license": "MIT",
+      "max_bytes_key": "ipv4_max_bytes",
+      "description": "Mainland China IPv4 CIDR set. This is the exact file Loyalsoldier/geoip adds as the 'cn' IPv4 category, so it is what geoip:cn resolves to."
+    },
+    "ipv6_experimental": {
+      "role": "experimental",
+      "kind": "github_raw",
+      "owner": "gaoyifan",
+      "repo": "china-operator-ip",
+      "ref": "ip-lists",
+      "path": "china6.txt",
+      "license": "MIT",
+      "max_bytes_key": "ipv4_max_bytes",
+      "description": "Mainland China IPv6 CIDR set. EXPERIMENTAL: never part of the default GL.iNet subscription."
+    },
+    "domains_primary": {
+      "role": "primary",
+      "kind": "github_raw",
+      "owner": "felixonmars",
+      "repo": "dnsmasq-china-list",
+      "ref": "master",
+      "path": "accelerated-domains.china.conf",
+      "license": "WTFPL",
+      "max_bytes_key": "domain_max_bytes",
+      "description": "Mainland China domain list in dnsmasq 'server=/domain/resolver' form. Loyalsoldier's china-list.txt is generated verbatim from this file; consuming it directly allows true commit-SHA pinning."
+    },
+    "domains_secondary": {
+      "role": "comparator",
+      "kind": "github_release_asset",
+      "owner": "Loyalsoldier",
+      "repo": "v2ray-rules-dat",
+      "ref": "latest",
+      "path": "china-list.txt",
+      "license": "GPL-3.0",
+      "max_bytes_key": "domain_max_bytes",
+      "description": "Independent anomaly comparator only. Never unioned into published output; its content is not redistributed by this project."
+    }
+  }
+}
