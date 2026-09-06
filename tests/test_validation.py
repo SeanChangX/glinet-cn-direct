@@ -177,7 +177,12 @@ class TestIPCanaries:
 
 
 class TestShippedArtifacts:
-    """The published files must survive the same validator users would run."""
+    """A local build's output must survive the same validator users would run.
+
+    `dist/` is not tracked in the repository — the `release` branch is the
+    published copy — so this skips unless someone has run a build here. CI
+    always has, because the workflow builds before it validates.
+    """
 
     def test_generated_artifacts_are_valid(self, tmp_path):
         from pathlib import Path
@@ -186,6 +191,6 @@ class TestShippedArtifacts:
         for name in ("cn-ipv4.txt", "cn-domains.txt", "cn-direct.txt"):
             path = dist / name
             if not path.is_file():
-                pytest.skip(f"{name} has not been generated in this checkout")
+                pytest.skip(f"{name} not built in this checkout; run a build first")
             result = validate_text_file(path)
             assert result.ok, result.problems[:5]
