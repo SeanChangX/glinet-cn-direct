@@ -93,8 +93,8 @@ everything else      ->  VPN tunnel
 
 ## Current output
 
-<!-- These figures are from the build committed in dist/; each release records
-     its own exact numbers in metadata.json. -->
+<!-- A snapshot for orientation, not a live figure. Every release records its
+     own exact numbers in metadata.json on the release branch. -->
 
 | Artifact | Rules | Size |
 | --- | ---: | ---: |

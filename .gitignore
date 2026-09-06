@@ -6,5 +6,9 @@ build/
 venv/
 .pytest_cache/
 .cache/
+
+# Generated rule files. The release branch is the published copy; keeping a
+# frozen duplicate on main would go stale the day after it was committed.
+dist/
 audit/
 previous/
