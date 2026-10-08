@@ -21,15 +21,43 @@ GL.iNet, v2rayN, V2Ray, Xray, or any of the upstream data projects it consumes.
 
 Paste one of these into your GL.iNet router. See [Setup](#setup) below.
 
-| File | Use it when | URL |
-| --- | --- | --- |
-| **`cn-ipv4.txt`** *(recommended)* | you want predictable, GeoIP-based routing | `https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-ipv4.txt` |
-| `cn-direct.txt` *(advanced)* | you want behavior closer to `geoip:cn + geosite:cn` | `https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-direct.txt` |
-| `cn-domains.txt` *(specialized)* | you only want domain rules | `https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-domains.txt` |
+| File | Use it when |
+| --- | --- |
+| **`cn-ipv4.txt`** *(recommended)* | you want predictable, GeoIP-based routing |
+| `cn-direct.txt` *(advanced)* | you want behavior closer to `geoip:cn + geosite:cn` |
+| `cn-domains.txt` *(specialized)* | you only want domain rules |
 
-The `release` branch is a moving pointer that your router follows automatically.
-For auditing, every published build is also tagged as an immutable
-[GitHub Release](../../releases) with checksums and full provenance metadata.
+Every file is published at two kinds of URL. Both serve the same bytes and both
+update automatically; they differ only in how reachable they are.
+
+**Release download** — try this first if the router is in mainland China:
+
+```text
+https://github.com/SeanChangX/glinet-cn-direct/releases/latest/download/cn-ipv4.txt
+https://github.com/SeanChangX/glinet-cn-direct/releases/latest/download/cn-direct.txt
+https://github.com/SeanChangX/glinet-cn-direct/releases/latest/download/cn-domains.txt
+```
+
+**Raw branch file** — simplest anywhere `raw.githubusercontent.com` is reachable:
+
+```text
+https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-ipv4.txt
+https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-direct.txt
+https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-domains.txt
+```
+
+The difference matters because the router downloads the list over its own WAN
+connection, not through the VPN tunnel. Anyone using this project has a mainland
+China WAN — that is where the direct traffic goes — and from mainland networks
+`raw.githubusercontent.com` is usually reset outright, while release downloads
+from `github.com` get through intermittently. Neither is guaranteed; see
+[If Detect finds 0 entries](#if-detect-finds-0-entries).
+
+The `release` branch always holds the newest build and the release-download URLs
+always resolve to the newest [GitHub Release](../../releases), so either form
+follows updates with no change on the router. Each release also carries
+checksums and full provenance metadata, and its tag is protected against being
+moved or deleted.
 
 > **Start with `cn-ipv4.txt`.** It has the clearest semantics and the lowest
 > false-positive risk, and in practice it already routes most Chinese services
@@ -88,6 +116,37 @@ CN domains           ->  local WAN
 CN IPv4              ->  local WAN
 everything else      ->  VPN tunnel
 ```
+
+### If Detect finds 0 entries
+
+`0 domain names or IP addresses were successfully detected` almost always means
+the router could not download the file, not that the file is empty. The
+pipeline never publishes an empty or partial list.
+
+Behaviour observed on firmware 4.11.0:
+
+- The router downloads the subscription over its own WAN, even while the tunnel
+  is connected. The tunnel's state neither helps nor hurts the download.
+- A failure that comes back instantly, with no timeout, is a connection reset:
+  the signature of a blocked host, not a slow one.
+- The router follows the redirect that a release-download URL returns.
+- URLs containing `@` are rejected outright with
+  `Illegal parameter, operation failed. [-32602]`, so CDN mirrors that pin a
+  branch as `repo@branch` (jsDelivr, for example) cannot be entered.
+- The stored list has been seen to drop to 0 after failed downloads. An empty
+  exclude list sends everything through the VPN: nothing leaks, but China
+  traffic takes the long way round.
+
+What to do:
+
+1. If you are on a raw URL, switch to the release-download URL.
+2. Do not press **Detect** or **Apply** repeatedly while downloads are failing.
+   Each press is a fresh download, and applying a 0 result may store an empty
+   list.
+3. Once **Detect** shows a plausible count, apply once and leave it.
+4. If neither URL gets through for long stretches, switch the mode to
+   **Manual** and paste the contents of `cn-ipv4.txt`. It stops updating on its
+   own, but the list changed by only about 1% over its first month.
 
 ---
 

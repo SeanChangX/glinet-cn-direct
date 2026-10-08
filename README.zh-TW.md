@@ -20,15 +20,39 @@
 
 把其中一個貼進你的 GL.iNet 路由器，設定步驟見下方[設定](#設定)。
 
-| 檔案 | 什麼時候用 | 網址 |
-| --- | --- | --- |
-| **`cn-ipv4.txt`** *（推薦）* | 想要可預測的 GeoIP 路由 | `https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-ipv4.txt` |
-| `cn-direct.txt` *（進階）* | 想要接近 `geoip:cn + geosite:cn` 的行為 | `https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-direct.txt` |
-| `cn-domains.txt` *（特殊用途）* | 只要網域規則 | `https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-domains.txt` |
+| 檔案 | 什麼時候用 |
+| --- | --- |
+| **`cn-ipv4.txt`** *（推薦）* | 想要可預測的 GeoIP 路由 |
+| `cn-direct.txt` *（進階）* | 想要接近 `geoip:cn + geosite:cn` 的行為 |
+| `cn-domains.txt` *（特殊用途）* | 只要網域規則 |
 
-`release` 分支是一個會移動的指標，你的路由器會自動跟隨。
-為了稽核，每一次發布也會同時打上不可變的
-[GitHub Release](../../releases) 標籤，附帶 checksum 與完整溯源資訊。
+每個檔案都有兩種網址。兩者內容完全相同、也都會自動更新，差別只在連不連得到。
+
+**Release 下載網址** —— 路由器在中國大陸的話，先用這個：
+
+```text
+https://github.com/SeanChangX/glinet-cn-direct/releases/latest/download/cn-ipv4.txt
+https://github.com/SeanChangX/glinet-cn-direct/releases/latest/download/cn-direct.txt
+https://github.com/SeanChangX/glinet-cn-direct/releases/latest/download/cn-domains.txt
+```
+
+**Raw 分支網址** —— 在連得到 `raw.githubusercontent.com` 的地方最單純：
+
+```text
+https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-ipv4.txt
+https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-direct.txt
+https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-domains.txt
+```
+
+會有差別，是因為路由器下載清單時走的是自己的 WAN，不經過 VPN 隧道。
+會用這個專案的人，WAN 一定在中國大陸（直連流量就是從那裡出去的），
+而從大陸網路連 `raw.githubusercontent.com` 通常會直接被重置，
+`github.com` 的 release 下載則是時通時不通。兩種都沒有保證，
+見[如果 Detect 偵測到 0 筆](#如果-detect-偵測到-0-筆)。
+
+`release` 分支永遠是最新一次 build，release 下載網址也永遠指向最新的
+[GitHub Release](../../releases)，所以不管用哪一種，路由器都不用改設定就會跟著更新。
+每個 release 都附帶 checksum 與完整溯源資訊，tag 也受保護、不能被移動或刪除。
 
 > **從 `cn-ipv4.txt` 開始。** 它的語意最清楚、偽陽性風險最低，
 > 而且實務上它已經能正確路由絕大多數中國服務 ——
@@ -85,6 +109,34 @@ VPN Dashboard
 中國 IPv4      ->  本地 WAN
 其他所有目的地  ->  VPN 隧道
 ```
+
+### 如果 Detect 偵測到 0 筆
+
+`0 domain names or IP addresses were successfully detected` 幾乎都代表路由器
+**下載失敗**，而不是檔案是空的。這條管線從不發布空的或不完整的清單。
+
+在韌體 4.11.0 上實際觀察到的行為：
+
+- 路由器下載訂閱清單時走自己的 WAN，就算隧道是連線狀態也一樣。
+  隧道通不通，對下載沒有幫助也沒有影響。
+- 失敗是「瞬間」回來、沒有等待逾時的話，那是連線被重置：
+  代表主機被擋，而不是網路慢。
+- 路由器會跟隨 release 下載網址回傳的轉址。
+- 網址裡有 `@` 會被直接拒絕，顯示
+  `Illegal parameter, operation failed. [-32602]`，所以用 `repo@branch`
+  指定分支的 CDN 鏡像（例如 jsDelivr）沒辦法填進去。
+- 曾觀察到下載失敗後，存著的清單變成 0 筆。排除清單是空的時候，
+  所有流量都會走 VPN：不會洩漏，只是中國流量會繞遠路。
+
+怎麼處理：
+
+1. 如果用的是 raw 網址，改成 release 下載網址。
+2. 下載一直失敗的時候，**不要反覆按 Detect 或 Apply**。
+   每按一次就是重新下載一次，而套用 0 筆的結果可能會存成空清單。
+3. 等 **Detect** 顯示合理的數字，套用一次就不要再動。
+4. 如果兩種網址都長時間連不上，把模式改成 **Manual**，
+   直接貼上 `cn-ipv4.txt` 的內容。這樣就不會自動更新了，
+   但這份清單第一個月總共只變動了大約 1%。
 
 ---
 
