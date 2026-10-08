@@ -53,7 +53,7 @@ https://raw.githubusercontent.com/SeanChangX/glinet-cn-direct/release/cn-direct.
 從中國大陸的網路連 `raw.githubusercontent.com` 經常連不上；
 Release 附檔網址通常比較穩定，但兩者都沒有保證。
 
-歷次建置都保留在 [GitHub Releases](../../releases)。
+歷次建置都保留在 [GitHub Releases](https://github.com/SeanChangX/glinet-cn-direct/releases)。
 
 ## 使用方式
 

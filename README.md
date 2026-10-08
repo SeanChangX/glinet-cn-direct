@@ -57,7 +57,7 @@ through the VPN. From networks in mainland China, `raw.githubusercontent.com` is
 frequently unreachable; the release-asset URL tends to be more reliable, though
 neither is guaranteed.
 
-Previous builds are kept as [GitHub Releases](../../releases).
+Previous builds are kept as [GitHub Releases](https://github.com/SeanChangX/glinet-cn-direct/releases).
 
 ## Usage
 
