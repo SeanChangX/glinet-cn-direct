@@ -2,9 +2,9 @@
 
 # glinet-cn-direct
 
-[![release](https://github.com/SeanChangX/glinet-cn-direct/actions/workflows/release.yml/badge.svg)](https://github.com/SeanChangX/glinet-cn-direct/actions/workflows/release.yml)
-[![Latest release](https://img.shields.io/github/v/release/SeanChangX/glinet-cn-direct)](https://github.com/SeanChangX/glinet-cn-direct/releases/latest)
-[![License: MIT](https://img.shields.io/github/license/SeanChangX/glinet-cn-direct)](LICENSE)
+[![build](https://img.shields.io/github/actions/workflow/status/SeanChangX/glinet-cn-direct/release.yml?label=build)](https://github.com/SeanChangX/glinet-cn-direct/actions/workflows/release.yml)
+[![release](https://img.shields.io/github/v/release/SeanChangX/glinet-cn-direct?label=release)](https://github.com/SeanChangX/glinet-cn-direct/releases/latest)
+[![license](https://img.shields.io/github/license/SeanChangX/glinet-cn-direct)](LICENSE)
 
 Mainland China IP and domain lists for VPN split tunneling, rebuilt daily from
 established upstream datasets and published only after automated safety checks
@@ -57,7 +57,8 @@ through the VPN. From networks in mainland China, `raw.githubusercontent.com` is
 frequently unreachable; the release-asset URL tends to be more reliable, though
 neither is guaranteed.
 
-Previous builds are kept as [GitHub Releases](https://github.com/SeanChangX/glinet-cn-direct/releases).
+Previous builds are kept as
+[GitHub Releases](https://github.com/SeanChangX/glinet-cn-direct/releases).
 
 ## Usage
 
@@ -92,23 +93,22 @@ covered by the safety checks.
 A scheduled GitHub Actions workflow rebuilds the lists daily and publishes a new
 release only when the content changes.
 
-- **Sources.** IPv4 comes from
+- **Sources:** IPv4 comes from
   [`gaoyifan/china-operator-ip`](https://github.com/gaoyifan/china-operator-ip),
   the same data behind `geoip:cn` in the V2Ray ecosystem. Domains come from
   [`felixonmars/dnsmasq-china-list`](https://github.com/felixonmars/dnsmasq-china-list).
   Every build pins both to a commit SHA. See [SOURCES.md](SOURCES.md).
-- **Validation.** Every line must be a valid domain, IPv4 address or IPv4 CIDR.
-- **Safety checks.** A build is rejected if it contains overly broad prefixes or
+- **Validation:** every line must be a valid domain, IPv4 address or IPv4 CIDR.
+- **Safety checks:** a build is rejected if it contains overly broad prefixes or
   reserved address ranges, matches a protected foreign domain, misclassifies a
   known address, disagrees with an independent second source, or changes too
   much from the previous release.
-- **Fail closed.** If any check fails, nothing is published and the previous
+- **Fail closed:** if any check fails, nothing is published and the previous
   release stays in place.
-- **Reproducible.** Output is deterministic, and every release records the
+- **Reproducible:** output is deterministic, and every release records the
   upstream revisions and file hashes it was built from.
 
-Thresholds and policy live in [`config/`](config/). The threat model is in
-[SECURITY.md](SECURITY.md).
+Thresholds and policy live in [`config/`](config/).
 
 ## Building from source
 
@@ -128,7 +128,27 @@ pip install -r requirements-dev.txt -e .
 python -m pytest
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+## Contributing
+
+Issues and pull requests are welcome. Please read
+[CONTRIBUTING.md](CONTRIBUTING.md) first, in particular the rules on generated
+files and safety thresholds.
+
+## Security
+
+Please report security issues through
+[private vulnerability reporting](https://github.com/SeanChangX/glinet-cn-direct/security/advisories/new)
+rather than a public issue. The threat model and reporting process are described
+in [SECURITY.md](SECURITY.md).
+
+## Acknowledgements
+
+- [`gaoyifan/china-operator-ip`](https://github.com/gaoyifan/china-operator-ip):
+  IPv4 data
+- [`felixonmars/dnsmasq-china-list`](https://github.com/felixonmars/dnsmasq-china-list):
+  domain data
+- [`Loyalsoldier/v2ray-rules-dat`](https://github.com/Loyalsoldier/v2ray-rules-dat):
+  independent cross-check
 
 ## Disclaimer
 
