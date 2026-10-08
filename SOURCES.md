@@ -132,22 +132,23 @@ cn-domains.txt = Mainland-China-focused domains
 
 ### `carrnot/china-ip-list`
 
-A perfectly reasonable China IPv4 list, and the baseline this deployment
-migrated *from*. Kept as a one-off migration comparator only
-(`scripts/compare-baseline.py`); it is not a runtime dependency and is never
-merged with the primary source.
+A widely used China IPv4 list and a reasonable alternative. It is not a source
+or a runtime dependency of this project and is never merged with the primary
+source. `scripts/compare-baseline.py` can compare a build against it, or against
+any other list, when switching subscriptions.
 
-See [README](README.md#migrating-from-another-subscription) for the measured
-migration difference.
+Measured at launch, this project's IPv4 set was a strict subset of it: 20% fewer
+networks but only 3.8% less address coverage, because the primary source
+expresses the same space in fewer, larger CIDRs.
 
 ### Multiple unioned GeoIP databases
 
 Deliberately avoided. Merging several China IP databases maximizes coverage at
 the cost of predictability: a false positive becomes untraceable, and every
 upstream gets a veto over your routing. One clearly documented authoritative
-source per rule category is the design choice here, and
-[README](README.md#design-principles) explains why false positives are the
-dangerous direction in this project.
+source per rule category is the design choice here, because false positives are
+the dangerous direction: a wrong entry silently routes traffic outside the VPN,
+while a missing one only makes Chinese traffic slower.
 
 ---
 
@@ -178,6 +179,32 @@ final      -> proxy             GL.iNet: anything unmatched stays in the tunnel
 This project claims **routing-policy alignment**, not identical rule-engine
 behavior. GL.iNet's matcher is not V2Ray or Xray, and no claim of byte-for-byte
 or engine-level equivalence is made.
+
+### Bare top-level-domain rules
+
+The domain list contains six single-label rules, each matching an entire
+top-level domain:
+
+```text
+cn            .cn     China country-code TLD
+xn--fiqs8s    .中国
+xn--55qx5d    .公司
+xn--io0a7i    .网络
+top           .top    generic TLD, Chinese registry, open registration
+wang          .wang   generic TLD, Chinese registry, open registration
+```
+
+`cn` carries real weight: upstream has no explicit `.cn` entries because it
+relies on this single rule, so removing it would send all of `.cn` through the
+tunnel.
+
+`top` and `wang` are a deliberate trade-off. Their registries are Chinese but
+registration is open worldwide, so some non-Chinese sites under them bypass the
+VPN. They are kept to match upstream `geosite:cn` semantics; remove them from
+[`config/allowed-tld-rules.txt`](config/allowed-tld-rules.txt) to opt out.
+
+Any bare TLD not listed in that file fails the build, so an upstream change
+cannot introduce one such as `com` unnoticed.
 
 ---
 

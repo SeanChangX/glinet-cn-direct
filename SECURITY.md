@@ -10,7 +10,7 @@ so you can judge it for yourself.
 ## Reporting a vulnerability
 
 Report suspected security problems privately through GitHub's
-[private vulnerability reporting](../../security/advisories/new) rather than in
+[private vulnerability reporting](https://github.com/SeanChangX/glinet-cn-direct/security/advisories/new) rather than in
 a public issue.
 
 Useful things to include: what you observed, which artifact and release, and —
