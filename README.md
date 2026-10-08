@@ -23,13 +23,15 @@ everything else              ->  VPN tunnel
 
 | File | Contents | Size |
 | --- | --- | --- |
-| `cn-ipv4.txt` | Mainland China IPv4 networks (CIDR) — **recommended** | ~6,200 lines, ~95 KiB |
+| `cn-ipv4.txt` | Mainland China IPv4 networks (CIDR) | ~6,200 lines, ~95 KiB |
 | `cn-domains.txt` | Mainland China domains | ~110,000 lines, ~1.3 MiB |
 | `cn-direct.txt` | `cn-domains.txt` followed by `cn-ipv4.txt` | ~117,000 lines, ~1.4 MiB |
 | `checksums.txt` | SHA-256 of the three lists | |
 | `metadata.json` | Upstream revisions, per-file counts and validation results | |
 
-Exact figures for every build are recorded in its `metadata.json`.
+`cn-ipv4.txt` is the recommended starting point: it is the smallest list and has
+the clearest matching semantics. Exact figures for every build are recorded in
+its `metadata.json`.
 
 ## Download
 

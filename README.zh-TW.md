@@ -19,13 +19,13 @@
 
 | 檔案 | 內容 | 大小 |
 | --- | --- | --- |
-| `cn-ipv4.txt` | 中國大陸 IPv4 網段（CIDR）—— **推薦** | 約 6,200 行，約 95 KiB |
+| `cn-ipv4.txt` | 中國大陸 IPv4 網段（CIDR） | 約 6,200 行，約 95 KiB |
 | `cn-domains.txt` | 中國大陸網域 | 約 110,000 行，約 1.3 MiB |
 | `cn-direct.txt` | `cn-domains.txt` 接著 `cn-ipv4.txt` | 約 117,000 行，約 1.4 MiB |
 | `checksums.txt` | 三份清單的 SHA-256 | |
 | `metadata.json` | 上游版本、各檔案條目數與驗證結果 | |
 
-每一次建置的確切數字都記錄在該版的 `metadata.json`。
+建議從 `cn-ipv4.txt` 開始，它是最小的一份，比對語意也最明確。每一次建置的確切數字都記錄在該版的 `metadata.json`。
 
 ## 下載
 
