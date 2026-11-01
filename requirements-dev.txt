@@ -4,4 +4,4 @@
 # and every Action to a full commit SHA: a build should fail because of a change
 # someone made, not because a third party released something overnight. A new
 # pytest arrives as a Dependabot pull request that CI has to pass first.
-pytest==9.1.1
+pytest==9.2.0
