@@ -1,9 +1,9 @@
 {
   "counts": {
-    "combined": 115747,
+    "combined": 115746,
     "domains": 109535,
-    "experimental_ipv6_networks": 3429,
-    "ipv4_networks": 6212
+    "experimental_ipv6_networks": 3428,
+    "ipv4_networks": 6211
   },
   "domains": {
     "bare_tld_rules": [
@@ -31,12 +31,12 @@
     "checksums.txt": {
       "bytes": 239,
       "lines": 3,
-      "sha256": "f61baed66c870d5e7ad68b666bfab61c67dec650a9a6462d3c5d45207de6119f"
+      "sha256": "9c8a8a86ddcdf4e6559c96d8419a675bdeba2fe1ef5b6f52e043b2ea4b4dac15"
     },
     "cn-direct.txt": {
-      "bytes": 1481549,
-      "lines": 115747,
-      "sha256": "1f163949cd1af17fd02c4e3d13ec2c7b7ff7f2cf2ca4414ee38e4d807eb8d3bd"
+      "bytes": 1481532,
+      "lines": 115746,
+      "sha256": "2ded902ef8212a5fa147b80397901b888cd5b5b211f7a2d139226a4c7db7b305"
     },
     "cn-domains.txt": {
       "bytes": 1384928,
@@ -44,54 +44,54 @@
       "sha256": "1551baefe55656583724f2c17e0683e11e06c531e3ea3b432d495cfd94f3e9b0"
     },
     "cn-ipv4.txt": {
-      "bytes": 96621,
-      "lines": 6212,
-      "sha256": "489f46e6c6eac040f6fda58f37f5693bfb4731929d5d66ab61e1720f88e79375"
+      "bytes": 96604,
+      "lines": 6211,
+      "sha256": "5ff82fdfe05b473dbfad6d31869d07e8b1590f3f43c228752f7cf07433ade2ad"
     }
   },
-  "generated_at": "2026-11-13T02:48:06Z",
-  "generated_on": "2026-11-13",
+  "generated_at": "2026-11-14T02:36:33Z",
+  "generated_on": "2026-11-14",
   "generator": "glinet-cn-direct",
   "generator_version": "1.0.0",
   "ipv4": {
-    "addresses": 344362493,
+    "addresses": 344361469,
     "broadest_prefix": "/10",
     "coverage_percent_ipv4": 8.0178,
-    "networks": 6212,
-    "networks_before_collapse": 6212,
+    "networks": 6211,
+    "networks_before_collapse": 6211,
     "parse": {
-      "entries_read": 6212,
+      "entries_read": 6211,
       "entries_rejected": 0,
-      "entries_valid": 6212,
-      "lines_read": 6212,
+      "entries_valid": 6211,
+      "lines_read": 6211,
       "rejected_percent": 0.0,
       "rejected_samples": []
     }
   },
   "sources": [
     {
-      "downloaded_at": "2026-11-13T02:48:01Z",
+      "downloaded_at": "2026-11-14T02:36:29Z",
       "key": "ipv4_primary",
       "license": "MIT",
       "name": "gaoyifan/china-operator-ip",
       "parse": {
-        "entries_read": 6212,
+        "entries_read": 6211,
         "entries_rejected": 0,
-        "entries_valid": 6212,
-        "lines_read": 6212,
+        "entries_valid": 6211,
+        "lines_read": 6211,
         "rejected_percent": 0.0,
         "rejected_samples": []
       },
       "path": "china.txt",
-      "revision": "d16fd0bf63bf8e99515a46d5c7795a6a8e7ebbf4",
+      "revision": "65542b2f10bc1e44c44644abe4f30affd723793c",
       "revision_kind": "commit",
       "role": "primary",
-      "size_bytes": 96621,
-      "source_sha256": "489f46e6c6eac040f6fda58f37f5693bfb4731929d5d66ab61e1720f88e79375",
-      "url": "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/d16fd0bf63bf8e99515a46d5c7795a6a8e7ebbf4/china.txt"
+      "size_bytes": 96604,
+      "source_sha256": "5ff82fdfe05b473dbfad6d31869d07e8b1590f3f43c228752f7cf07433ade2ad",
+      "url": "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/65542b2f10bc1e44c44644abe4f30affd723793c/china.txt"
     },
     {
-      "downloaded_at": "2026-11-13T02:48:02Z",
+      "downloaded_at": "2026-11-14T02:36:30Z",
       "key": "domains_primary",
       "license": "WTFPL",
       "name": "felixonmars/dnsmasq-china-list",
@@ -115,30 +115,30 @@
       "url": "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/fbd13c69903464294175d321d0e96560ffd2dd40/accelerated-domains.china.conf"
     },
     {
-      "downloaded_at": "2026-11-13T02:48:03Z",
+      "downloaded_at": "2026-11-14T02:36:30Z",
       "key": "domains_secondary",
       "license": "GPL-3.0",
       "name": "Loyalsoldier/v2ray-rules-dat",
       "path": "china-list.txt",
-      "revision": "202611122204",
+      "revision": "202611132203",
       "revision_kind": "release_tag",
       "role": "comparator",
-      "size_bytes": 1383933,
-      "source_sha256": "7be397e2e81e1b9b39ec7d1e34622006493f0724ec1dbb108a91a652528928c8",
-      "url": "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/202611122204/china-list.txt"
+      "size_bytes": 1385248,
+      "source_sha256": "bf6df9aa050d6583363cdbada532e5d5480247d62a9056a7690ecd8ac1ef0234",
+      "url": "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/202611132203/china-list.txt"
     },
     {
-      "downloaded_at": "2026-11-13T02:48:03Z",
+      "downloaded_at": "2026-11-14T02:36:31Z",
       "key": "ipv6_experimental",
       "license": "MIT",
       "name": "gaoyifan/china-operator-ip",
       "path": "china6.txt",
-      "revision": "d16fd0bf63bf8e99515a46d5c7795a6a8e7ebbf4",
+      "revision": "65542b2f10bc1e44c44644abe4f30affd723793c",
       "revision_kind": "commit",
       "role": "experimental",
-      "size_bytes": 57049,
-      "source_sha256": "3f2a92179e16a8c8016b478d1922455123af731b1fc2a23534d16ecef5103dc1",
-      "url": "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/d16fd0bf63bf8e99515a46d5c7795a6a8e7ebbf4/china6.txt"
+      "size_bytes": 57030,
+      "source_sha256": "21912aa7f68715f32e2550d24630c000cbf85249c6e2323d1578fc5791604512",
+      "url": "https://raw.githubusercontent.com/gaoyifan/china-operator-ip/65542b2f10bc1e44c44644abe4f30affd723793c/china6.txt"
     }
   ],
   "warnings": []
